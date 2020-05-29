@@ -15,3 +15,8 @@ $ aws dynamodb create-table \
       --key-schema AttributeName=projectName,KeyType=HASH AttributeName=projectType,KeyType=RANGE \
       --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
 ```
+
+#### Update Table
+Add two Attributes: ```memberName```, ```startDate```
+
+Do it by manual
