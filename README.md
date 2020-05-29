@@ -1,1 +1,17 @@
 # hello_dynamodb
+
+### Practice Tasks
+
+#### Create Table
+Create a table ```Project_Qilin```, 
+the partition key is ```projectName``` and the sort key should be ```projectType```
+
+```shell script
+$ aws dynamodb create-table \
+      --table-name Project_Qilin \
+      --attribute-definitions \
+        AttributeName=projectName,AttributeType=S \
+        AttributeName=projectType,AttributeType=S \
+      --key-schema AttributeName=projectName,KeyType=HASH AttributeName=projectType,KeyType=RANGE \
+      --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+```
