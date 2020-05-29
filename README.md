@@ -31,3 +31,8 @@ $ sh insert_data.sh
 ```shell script
 $ sh update_data.sh
 ```
+
+#### Update data
+```shell script
+$ sh retrieve_data.sh
+```
