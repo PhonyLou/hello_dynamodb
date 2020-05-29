@@ -36,3 +36,8 @@ $ sh update_data.sh
 ```shell script
 $ sh retrieve_data.sh
 ```
+
+#### query data
+```shell script
+$ sh query_data.sh
+```
