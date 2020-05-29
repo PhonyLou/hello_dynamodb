@@ -26,3 +26,8 @@ Parameter type must be one of: S, N, B, SS, NS, BS, M, L, NULL, BOOL
 ```shell script
 $ sh insert_data.sh
 ```
+
+#### Update data
+```shell script
+$ sh update_data.sh
+```
