@@ -20,3 +20,9 @@ $ aws dynamodb create-table \
 Add two Attributes: ```memberName```, ```startDate```
 
 Do it by manual
+
+#### Insert data
+Parameter type must be one of: S, N, B, SS, NS, BS, M, L, NULL, BOOL
+```shell script
+$ sh insert_data.sh
+```
