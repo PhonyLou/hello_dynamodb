@@ -46,3 +46,9 @@ $ sh query_data.sh
 ```shell script
 $ sh scan.sh
 ```
+
+#### GSI
+Create GSI by manual, query GSI by using
+```shell script
+$ sh query_GSI.sh
+```
