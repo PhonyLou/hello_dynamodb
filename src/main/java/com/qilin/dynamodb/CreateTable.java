@@ -1,5 +1,6 @@
 package com.qilin.dynamodb;
 
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
@@ -11,7 +12,9 @@ import java.util.Arrays;
 public class CreateTable {
     public static void main(String[] args) throws Exception {
 
-        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.defaultClient();
+        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "ap-southeast-1"))
+                .build();
 
         DynamoDB dynamoDB = new DynamoDB(client);
 
