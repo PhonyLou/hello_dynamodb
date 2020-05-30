@@ -41,3 +41,8 @@ $ sh retrieve_data.sh
 ```shell script
 $ sh query_data.sh
 ```
+
+#### Scan data
+```shell script
+$ sh scan.sh
+```
