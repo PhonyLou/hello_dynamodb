@@ -12,4 +12,12 @@ public class DbHelperTest {
                 "Offshore", "Dr. Zen", 20200530L);
         PutItemOutcome outcome = dbHelper.insert(baseData);
     }
+
+    @Test
+    void test_update_item_on_local() {
+        DbHelper dbHelper = new DbHelper("Local");
+        BaseData baseData = new BaseData("Project-DynamoDB-1",
+                "Offshore", "Dr. Abby Smith", 20200530L);
+        dbHelper.update(baseData);
+    }
 }

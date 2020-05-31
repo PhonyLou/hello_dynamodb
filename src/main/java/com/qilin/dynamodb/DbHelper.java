@@ -3,10 +3,10 @@ package com.qilin.dynamodb;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
-import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.document.*;
+import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
+import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
+import com.amazonaws.services.dynamodbv2.model.ReturnValue;
 
 public class DbHelper {
     AmazonDynamoDB client;
@@ -38,5 +38,18 @@ public class DbHelper {
 
         return outcome;
 
+    }
+
+    public void update(BaseData baseData) {
+        DynamoDB dynamoDB = new DynamoDB(client);
+        Table table = dynamoDB.getTable("Project_Qilin");
+
+        UpdateItemSpec updateItemSpec = new UpdateItemSpec().withPrimaryKey("projectName", baseData.getProjectName(), "projectType", baseData.getProjectType())
+                .withUpdateExpression("set memberName = :r").withValueMap(new ValueMap().withString(":r", baseData.getMemberName()))
+                .withReturnValues(ReturnValue.UPDATED_NEW);
+
+        System.out.println("Updating the item...");
+        UpdateItemOutcome outcome = table.updateItem(updateItemSpec);
+        System.out.println("UpdateItem succeeded:\n" + outcome.getItem().toJSONPretty());
     }
 }
