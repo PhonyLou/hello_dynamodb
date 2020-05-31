@@ -4,6 +4,7 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.*;
+import com.amazonaws.services.dynamodbv2.document.spec.DeleteItemSpec;
 import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
@@ -22,7 +23,7 @@ public class DbHelper {
         }
     }
 
-    PutItemOutcome insert(final BaseData data) {
+    void insert(final BaseData data) {
         DynamoDB dynamoDB = new DynamoDB(client);
         Table table = dynamoDB.getTable("Project_Qilin");
         String projectName = data.getProjectName();
@@ -36,8 +37,6 @@ public class DbHelper {
                         .withString("memberName", memberName).withNumber("startDate", startDate));
 
         System.out.println("PutItem succeeded:\n" + outcome.getPutItemResult());
-
-        return outcome;
 
     }
 
@@ -62,5 +61,19 @@ public class DbHelper {
         System.out.println("Attempting to read the item...");
         Item outcome = table.getItem(spec);
         System.out.println("GetItem succeeded: " + outcome);
+    }
+
+    public void delete(BaseData baseData) {
+        DynamoDB dynamoDB = new DynamoDB(client);
+        Table table = dynamoDB.getTable("Project_Qilin");
+
+        DeleteItemSpec deleteItemSpec = new DeleteItemSpec()
+                .withPrimaryKey(new PrimaryKey("projectName", baseData.getProjectName(), "projectType", baseData.getProjectType()))
+                .withConditionExpression("startDate <= :val")
+                .withValueMap(new ValueMap().withNumber(":val", 20200530));
+
+        System.out.println("Attempting a conditional delete...");
+        table.deleteItem(deleteItemSpec);
+        System.out.println("DeleteItem succeeded");
     }
 }

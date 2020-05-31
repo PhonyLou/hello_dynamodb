@@ -1,6 +1,5 @@
 package com.qilin.dynamodb;
 
-import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
 import org.junit.jupiter.api.Test;
 
 public class DbHelperTest {
@@ -10,7 +9,7 @@ public class DbHelperTest {
         DbHelper dbHelper = new DbHelper("Local");
         BaseData baseData = new BaseData("Project-DynamoDB-1",
                 "Offshore", "Dr. Zen", 20200530L);
-        PutItemOutcome outcome = dbHelper.insert(baseData);
+        dbHelper.insert(baseData);
     }
 
     @Test
@@ -27,5 +26,13 @@ public class DbHelperTest {
         BaseData baseData = new BaseData("Project-DynamoDB-1",
                 "Offshore", "Dr. Abby Smith", 20200530L);
         dbHelper.update(baseData);
+    }
+
+    @Test
+    void test_delete_item_on_local() {
+        DbHelper dbHelper = new DbHelper("Local");
+        BaseData baseData = new BaseData("Project-DynamoDB-1",
+                "Offshore", "Dr. Abby Smith", 20200530L);
+        dbHelper.delete(baseData);
     }
 }
