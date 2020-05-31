@@ -4,6 +4,7 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.*;
+import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.dynamodbv2.model.ReturnValue;
@@ -51,5 +52,15 @@ public class DbHelper {
         System.out.println("Updating the item...");
         UpdateItemOutcome outcome = table.updateItem(updateItemSpec);
         System.out.println("UpdateItem succeeded:\n" + outcome.getItem().toJSONPretty());
+    }
+
+    public void get(BaseData baseData) {
+        DynamoDB dynamoDB = new DynamoDB(client);
+        Table table = dynamoDB.getTable("Project_Qilin");
+        GetItemSpec spec = new GetItemSpec().withPrimaryKey("projectName", baseData.getProjectName(), "projectType", baseData.getProjectType());
+
+        System.out.println("Attempting to read the item...");
+        Item outcome = table.getItem(spec);
+        System.out.println("GetItem succeeded: " + outcome);
     }
 }
