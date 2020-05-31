@@ -8,10 +8,10 @@ import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
 
-public class InsertItem {
+public class DbHelper {
     AmazonDynamoDB client;
 
-    public InsertItem(final String stage) {
+    public DbHelper(final String stage) {
         if ("Local".equals(stage)) {
             client = AmazonDynamoDBClientBuilder.standard()
                     .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "ap-southeast-1"))
@@ -21,13 +21,13 @@ public class InsertItem {
         }
     }
 
-    PutItemOutcome insert() {
+    PutItemOutcome insert(final BaseData data) {
         DynamoDB dynamoDB = new DynamoDB(client);
         Table table = dynamoDB.getTable("Project_Qilin");
-        String projectName = "Project-DynamoDB-1";
-        String projectType = "Offshore";
-        String memberName = "Dr. Zen";
-        long startDate = 20200530L;
+        String projectName = data.getProjectName();
+        String projectType = data.getProjectType();
+        String memberName = data.getMemberName();
+        long startDate = data.getStartDate();
 
         System.out.println("Adding a new item...");
         PutItemOutcome outcome = table

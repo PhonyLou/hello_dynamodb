@@ -69,3 +69,9 @@ $ sh query_GSI.sh
 5. DynamoDB支持哪两种类型的索引,这两种索引的区别是什么?
 - 全局二级索引，分区键可以自定义，排序键可选
 - 本地二级索引，分区键必须使用基表分区键，排序键与基表不同
+
+#### Starting local dynamoDB
+
+```shell script
+$ sh start-local-db.sh
+```
