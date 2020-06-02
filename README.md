@@ -1,5 +1,14 @@
 # hello_dynamodb
 
+#### 什么是 NoSQL
+
+SQL 是结构化查询语言的缩写，其操作的数据是结构化的
+NoSQL 是另一种数据存储方式，主要存储对象是非结构化数据（Key-Value Pair, Documents, etc）
+
+#### 什么是 DyanmoDB
+
+DynamoDB 是AWS提供的一种全托管、高性能NoSQL数据库。
+
 ### Practice Tasks
 
 #### Create Table
