@@ -5,6 +5,14 @@
 SQL 是结构化查询语言的缩写，其操作的数据是结构化的
 NoSQL 是另一种数据存储方式，主要存储对象是非结构化数据（Key-Value Pair, Documents, etc）
 
+SQL 需要预先定义Schema，NoSQL不需要
+
+SQL 在处理跨表查询非常容易，但是 NoSQL一般会把数据直接冗余在一张表中（这被称为去中心化）
+
+NoSQL 在设计之初就考虑了集群需求，可以更容易地做水平扩展
+
+总之，通过业务来决定选择 SQL 或者是 NoSQL
+
 #### 什么是 DyanmoDB
 
 DynamoDB 是AWS提供的一种全托管、高性能NoSQL数据库。
